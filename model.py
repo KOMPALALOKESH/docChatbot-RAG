@@ -3,6 +3,7 @@ from llama_index.core import PromptTemplate
 from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index.core import VectorStoreIndex, ServiceContext
 import torch
+import sentence_transformers
 
 system_prompt = "You are a Q&A assistant. Your goal is to answer questions as accurately as possible based on the instructions and context provided."
 # This will wrap the default prompts that are internal to llama-index
