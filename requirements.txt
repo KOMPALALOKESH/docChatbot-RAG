@@ -7,3 +7,4 @@ accelerate
 torch
 llama-index-llms-huggingface
 langchain
+llama-index-embeddings-huggingface
