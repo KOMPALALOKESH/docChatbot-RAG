@@ -7,4 +7,6 @@ accelerate
 torch
 llama-index-llms-huggingface
 langchain
+sentence-transformers
 llama-index-embeddings-huggingface
+llama-index-embeddings-langchain
