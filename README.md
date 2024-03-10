@@ -1,7 +1,7 @@
 # assignment
 
-## clone repo
-# Clone the GitHub repository
+
+## Clone the GitHub repository
 ```
 !git clone https://github.com/KOMPALALOKESH/assignment.git
 ```
