@@ -6,3 +6,4 @@ einops
 accelerate
 torch
 llama-index-llms-huggingface
+langchain
