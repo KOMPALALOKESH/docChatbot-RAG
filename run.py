@@ -19,8 +19,9 @@ def move_pdf_files():
 flag = False
 # generate answers
 def generate(input, history):
+    move_pdf_files()
     global flag
-    if flag==false:
+    if flag==False:
         move_pdf_files()
         # read directory
         documents = SimpleDirectoryReader("/content/assignment/Data").load_data()
