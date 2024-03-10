@@ -1,23 +1,28 @@
 from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 from constants import title, description, examples
-# from model import query_engine, service_context
+from model import service_context
 import gradio as gr
 import os
 import shutil
 
 # move files to "Data" folder
 def move_pdf_files(files_paths):
+    if os.path.exists('/content/assignment/Data/'):
+        shutil.rmtree('/content/assignment/Data/')
+      
     os.makedirs("Data", exist_ok=True)
-    dst_folder = "/content/assignment/Data/"
+    dst = "/content/assignment/Data/"
 
     for src in files_paths:
         shutil.copy2(src, dst)
     return "successfully loaded files."
 
 flag = False
+query_engine = None
 # generate answers
 def generate(input, history):
     global flag
+    global query_engine
     if flag==False:
         # read directory
         documents = SimpleDirectoryReader("/content/assignment/Data").load_data()
@@ -27,7 +32,7 @@ def generate(input, history):
         query_engine = index.as_query_engine()
         # set flag=True
         flag=True
-        
+    # else:   
     response = query_engine.query(input)
     return str(response)
 
@@ -36,7 +41,7 @@ def upload_file(files):
     global file_paths
     file_paths = [file.name for file in files]
     move_pdf_files(file_paths)
-    return "success"
+    return file_paths
 
 # gradio UI
 with gr.Blocks() as demo:
