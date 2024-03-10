@@ -1,7 +1,8 @@
 from llama_index.llms.huggingface import HuggingFaceLLM
 from llama_index.core import PromptTemplate
-from llama_index.embeddings import HuggingFaceEmbedding
+from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index.core import VectorStoreIndex, ServiceContext
+import torch
 
 system_prompt = "You are a Q&A assistant. Your goal is to answer questions as accurately as possible based on the instructions and context provided."
 # This will wrap the default prompts that are internal to llama-index
@@ -21,15 +22,10 @@ llm = HuggingFaceLLM(
 )
 
 # loads BAAI/bge-small-en-v1.5
-embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embed_model = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
 # service context
 service_context = ServiceContext.from_defaults(
     chunk_size=1024,
     llm=llm,
     embed_model=embed_model
 )
-
-# indexing
-index = VectorStoreIndex.from_documents(documents, service_context=service_context)
-# query engine
-query_engine = index.as_query_engine()
