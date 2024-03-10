@@ -1,4 +1,4 @@
-from llama_index.core import SimpleDirectoryReader
+from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 from constants import title, description, examples
 from model import query_engine, service_context
 import gradio as gr
