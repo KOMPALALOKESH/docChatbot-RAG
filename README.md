@@ -13,7 +13,7 @@
 
 ## Install requirements
 ```
-%run requirements.txt.py
+%pip install -r requirements.txt.py
 ```
 
 ## Load model
