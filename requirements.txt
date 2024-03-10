@@ -1,0 +1,8 @@
+pypdf
+python-dotenv
+llama-index
+gradio
+einops
+accelerate
+torch
+llama-index-llms-huggingface
