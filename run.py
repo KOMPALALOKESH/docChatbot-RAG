@@ -1,28 +1,24 @@
 from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 from constants import title, description, examples
+# from model import query_engine, service_context
 import gradio as gr
 import os
 import shutil
 
 # move files to "Data" folder
-def move_pdf_files():
+def move_pdf_files(files_paths):
     os.makedirs("Data", exist_ok=True)
+    dst_folder = "/content/assignment/Data/"
 
-    pdf_files = [f for f in os.listdir("/content") if f.endswith(".pdf")]
-
-    for pdf_file in pdf_files:
-        src_path = os.path.join("/content", pdf_file)
-        dest_path = os.path.join("/content/assignment/Data", pdf_file)
-        shutil.move(src_path, dest_path)
-    return "success"
+    for src in files_paths:
+        shutil.copy2(src, dst)
+    return "successfully loaded files."
 
 flag = False
 # generate answers
 def generate(input, history):
-    move_pdf_files()
     global flag
     if flag==False:
-        move_pdf_files()
         # read directory
         documents = SimpleDirectoryReader("/content/assignment/Data").load_data()
         # indexing
@@ -35,11 +31,19 @@ def generate(input, history):
     response = query_engine.query(input)
     return str(response)
 
+file_paths = None
+def upload_file(files):
+    global file_paths
+    file_paths = [file.name for file in files]
+    move_pdf_files(file_paths)
+    return "success"
+
 # gradio UI
 with gr.Blocks() as demo:
     # file input
     file_output = gr.File()
     upload_button = gr.UploadButton("Click to Upload a File", file_types=["pdf"], file_count="multiple")
+    upload_button.upload(upload_file, upload_button, file_output)
     
     # chat UI
     with gr.Blocks(): 
