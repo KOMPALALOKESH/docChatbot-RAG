@@ -1,5 +1,5 @@
 # assignment
-make sure runtime accelerator should be **GPU**
+make sure runtime accelerator should be **GPU**<br>
 **run the colab notebook "Untitled0.ipynb"**
 
 UI result:
