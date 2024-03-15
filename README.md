@@ -1,4 +1,4 @@
-# assignment
+# docChatbot - RAG
 make sure runtime accelerator should be **GPU**<br>
 **run the colab notebook "Untitled0.ipynb"**
 
